@@ -437,73 +437,63 @@
 
 </footer><script>
 
-function generateScript() {
+async function generateScript() {
 
     const topic = document.getElementById("topic").value.trim();
-
     const platform = document.getElementById("platform").value;
-
     const style = document.getElementById("style").value;
 
     const result = document.getElementById("result");
-
     const scriptResult = document.getElementById("scriptResult");
 
-
     if (!topic) {
-
         alert("Silakan masukkan topik video terlebih dahulu.");
-
         return;
-
     }
 
-
-    const script =
-
-`HOOK
-
-"Stop scroll! Kamu mungkin belum tahu fakta menarik tentang ${topic}."
-
-
-KONFLIK
-
-"Banyak orang membahas ${topic}, tetapi ternyata ada sisi lain yang jarang diketahui."
-
-
-ISI
-
-"Pertama, kita perlu memahami apa sebenarnya ${topic}.
-
-Kemudian, ada beberapa fakta menarik yang membuat topik ini semakin menarik untuk dibahas.
-
-Inilah alasan mengapa ${topic} layak untuk kamu ketahui."
-
-
-TWIST
-
-"Dan yang paling mengejutkan adalah, ternyata masih banyak orang yang belum mengetahui fakta tersebut."
-
-
-CTA
-
-"Kalau kamu suka konten seperti ini, follow dan bagikan video ini."
-
-
-Platform: ${platform}
-Gaya: ${style}`;
-
-
-    scriptResult.textContent = script;
-
+    scriptResult.textContent = "⏳ Sedang membuat script...";
     result.style.display = "block";
+
+    try {
+
+        const response = await fetch(
+            "MASUKKAN_URL_WORKER_KAMU_DI_SINI",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    topic: topic,
+                    platform: platform,
+                    style: style
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Terjadi kesalahan.");
+        }
+
+        scriptResult.textContent = data.script;
+
+    } catch (error) {
+
+        scriptResult.textContent =
+            "❌ Gagal menghubungi server.\n\n" +
+            error.message;
+
+    }
 
     result.scrollIntoView({
         behavior: "smooth",
         block: "start"
     });
-
-}
+    }
 
 </script></body>
 </html>
