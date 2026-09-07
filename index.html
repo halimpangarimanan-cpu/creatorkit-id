@@ -1,499 +1,870 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CreatorKit ID — Tools AI untuk Creator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="CreatorKit ID adalah kumpulan tools untuk membantu creator Indonesia membuat konten lebih cepat.">
+    <title>CreatorKit ID — AI Tools untuk Creator Indonesia</title>
 
-<style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+    <meta name="description" content="CreatorKit ID membantu creator Indonesia membuat script, hook, caption, ide konten, dan prompt AI dengan lebih cepat.">
 
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        background: #f5f7fb;
-        color: #111827;
-        line-height: 1.6;
-    }
-
-    header {
-        background: #ffffff;
-        border-bottom: 1px solid #e5e7eb;
-        position: sticky;
-        top: 0;
-        z-index: 100;
-    }
-
-    .nav {
-        max-width: 1100px;
-        margin: auto;
-        padding: 16px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .logo {
-        font-size: 22px;
-        font-weight: 800;
-        color: #2563eb;
-    }
-
-    .logo span {
-        color: #111827;
-    }
-
-    .nav a {
-        text-decoration: none;
-        color: #374151;
-        margin-left: 20px;
-        font-size: 14px;
-    }
-
-    .hero {
-        max-width: 1100px;
-        margin: auto;
-        padding: 80px 20px 60px;
-        text-align: center;
-    }
-
-    .badge {
-        display: inline-block;
-        background: #dbeafe;
-        color: #1d4ed8;
-        padding: 7px 14px;
-        border-radius: 50px;
-        font-size: 13px;
-        font-weight: 700;
-        margin-bottom: 20px;
-    }
-
-    .hero h1 {
-        font-size: clamp(38px, 7vw, 68px);
-        line-height: 1.05;
-        margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-        color: #2563eb;
-    }
-
-    .hero p {
-        max-width: 650px;
-        margin: auto;
-        color: #6b7280;
-        font-size: 18px;
-    }
-
-    .button {
-        display: inline-block;
-        margin-top: 30px;
-        padding: 14px 25px;
-        border-radius: 10px;
-        background: #2563eb;
-        color: white;
-        text-decoration: none;
-        font-weight: 700;
-        border: none;
-        cursor: pointer;
-    }
-
-    .button:hover {
-        background: #1d4ed8;
-    }
-
-    .section {
-        max-width: 1100px;
-        margin: auto;
-        padding: 40px 20px 80px;
-    }
-
-    .section-title {
-        text-align: center;
-        margin-bottom: 35px;
-    }
-
-    .section-title h2 {
-        font-size: 32px;
-        margin-bottom: 8px;
-    }
-
-    .section-title p {
-        color: #6b7280;
-    }
-
-    .tools {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 18px;
-    }
-
-    .tool {
-        background: white;
-        padding: 25px 18px;
-        border-radius: 16px;
-        border: 1px solid #e5e7eb;
-        transition: 0.2s;
-    }
-
-    .tool:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.07);
-    }
-
-    .icon {
-        font-size: 32px;
-        margin-bottom: 12px;
-    }
-
-    .tool h3 {
-        font-size: 18px;
-        margin-bottom: 8px;
-    }
-
-    .tool p {
-        color: #6b7280;
-        font-size: 14px;
-    }
-
-    .generator {
-        max-width: 750px;
-        margin: 50px auto 0;
-        background: white;
-        padding: 30px;
-        border-radius: 18px;
-        border: 1px solid #e5e7eb;
-    }
-
-    .generator h2 {
-        margin-bottom: 8px;
-    }
-
-    .generator > p {
-        color: #6b7280;
-        margin-bottom: 25px;
-    }
-
-    label {
-        display: block;
-        font-weight: 700;
-        margin-bottom: 7px;
-    }
-
-    input,
-    select,
-    textarea {
-        width: 100%;
-        padding: 13px;
-        border: 1px solid #d1d5db;
-        border-radius: 9px;
-        margin-bottom: 18px;
-        font-size: 15px;
-        font-family: inherit;
-    }
-
-    textarea {
-        min-height: 120px;
-        resize: vertical;
-    }
-
-    .result {
-        display: none;
-        margin-top: 25px;
-        padding: 20px;
-        background: #f8fafc;
-        border-radius: 12px;
-        border: 1px solid #e2e8f0;
-    }
-
-    .result h3 {
-        margin-bottom: 10px;
-    }
-
-    .result p {
-        white-space: pre-line;
-    }
-
-    .features {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        margin-top: 30px;
-    }
-
-    .feature {
-        text-align: center;
-        background: white;
-        padding: 25px;
-        border-radius: 15px;
-    }
-
-    .feature strong {
-        display: block;
-        margin-bottom: 7px;
-    }
-
-    footer {
-        background: #111827;
-        color: white;
-        text-align: center;
-        padding: 35px 20px;
-    }
-
-    footer p {
-        color: #9ca3af;
-        font-size: 14px;
-        margin-top: 8px;
-    }
-
-    @media (max-width: 850px) {
-        .tools {
-            grid-template-columns: repeat(2, 1fr);
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-    }
 
-    @media (max-width: 600px) {
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #111827;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav {
+            max-width: 1100px;
+            margin: auto;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: #2563eb;
+        }
+
+        .logo span {
+            color: #111827;
+        }
+
         .nav a {
-            display: none;
+            text-decoration: none;
+            color: #374151;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+
+        .nav a:hover {
+            color: #2563eb;
         }
 
         .hero {
-            padding-top: 55px;
+            max-width: 1100px;
+            margin: auto;
+            padding: 80px 20px 60px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 7px 14px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 7vw, 68px);
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #2563eb;
         }
 
         .hero p {
-            font-size: 16px;
+            max-width: 650px;
+            margin: auto;
+            color: #6b7280;
+            font-size: 18px;
         }
 
-        .tools,
-        .features {
-            grid-template-columns: 1fr;
+        .button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 14px 25px;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .button:hover {
+            background: #1d4ed8;
+        }
+
+        .button:disabled {
+            background: #93c5fd;
+            cursor: not-allowed;
+        }
+
+        .section {
+            max-width: 1100px;
+            margin: auto;
+            padding: 40px 20px 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: #6b7280;
+        }
+
+        .tools {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+        }
+
+        .tool {
+            background: white;
+            padding: 25px 18px;
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+            transition: 0.2s;
+        }
+
+        .tool:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+        }
+
+        .icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .tool h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .tool p {
+            color: #6b7280;
+            font-size: 14px;
         }
 
         .generator {
-            padding: 22px;
+            max-width: 800px;
+            margin: 50px auto 0;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
         }
-    }
-</style>
 
-</head><body><header>
+        .generator h2 {
+            margin-bottom: 8px;
+        }
+
+        .generator > p {
+            color: #6b7280;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            margin-bottom: 18px;
+            font-size: 15px;
+            font-family: inherit;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .generate-button {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .result {
+            display: none;
+            margin-top: 25px;
+            padding: 22px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .result h3 {
+            margin: 0;
+        }
+
+        .copy-button {
+            padding: 8px 13px;
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .copy-button:hover {
+            background: #f3f4f6;
+        }
+
+        .result-content {
+            background: white;
+            padding: 18px;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .result-content p {
+            white-space: pre-line;
+            word-wrap: break-word;
+        }
+
+        .status {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #6b7280;
+            text-align: center;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature {
+            text-align: center;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .feature strong {
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        footer p {
+            color: #9ca3af;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .error {
+            color: #b91c1c;
+        }
+
+        @media (max-width: 850px) {
+            .tools {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav a {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 55px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .tools,
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .generator {
+                padding: 22px;
+            }
+
+            .result-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
     <div class="nav">
-        <div class="logo">Creator<span>Kit ID</span></div>    <nav>
-        <a href="#tools">Tools</a>
-        <a href="#generator">Generator</a>
-        <a href="#tentang">Tentang</a>
-    </nav>
-</div>
 
-</header><section class="hero"><div class="badge">🚀 GRATIS UNTUK CREATOR INDONESIA</div>
+        <div class="logo">
+            Creator<span>Kit ID</span>
+        </div>
 
-<h1>
-    Buat Konten<br>
-    <span>Lebih Cepat.</span>
-</h1>
+        <nav>
+            <a href="#tools">Tools</a>
+            <a href="#generator">Generator</a>
+            <a href="#tentang">Tentang</a>
+        </nav>
 
-<p>
-    CreatorKit ID membantu YouTuber, TikToker,
-    Facebook creator, dan UMKM membuat ide dan
-    konten dengan lebih mudah.
-</p>
+    </div>
+</header>
 
-<a href="#generator" class="button">
-    Mulai Sekarang →
-</a>
 
-</section><section class="section" id="tools"><div class="section-title">
-    <h2>🛠️ Creator Tools</h2>
-    <p>Pilih tools yang kamu butuhkan.</p>
-</div>
+<section class="hero">
 
-<div class="tools">
-
-    <div class="tool">
-        <div class="icon">📝</div>
-        <h3>Script Generator</h3>
-        <p>Buat script video berdasarkan topik.</p>
+    <div class="badge">
+        🚀 GRATIS UNTUK CREATOR INDONESIA
     </div>
 
-    <div class="tool">
-        <div class="icon">🧲</div>
-        <h3>Hook Generator</h3>
-        <p>Buat pembukaan video yang menarik.</p>
-    </div>
-
-    <div class="tool">
-        <div class="icon">💡</div>
-        <h3>Ide Konten</h3>
-        <p>Temukan ide konten baru.</p>
-    </div>
-
-    <div class="tool">
-        <div class="icon">📱</div>
-        <h3>Caption</h3>
-        <p>Buat caption untuk media sosial.</p>
-    </div>
-
-    <div class="tool">
-        <div class="icon">🎨</div>
-        <h3>AI Prompt</h3>
-        <p>Buat prompt gambar dan video AI.</p>
-    </div>
-
-</div>
-
-
-<div class="generator" id="generator">
-
-    <h2>📝 Script Generator</h2>
+    <h1>
+        Buat Konten<br>
+        <span>Lebih Cepat.</span>
+    </h1>
 
     <p>
-        Masukkan topik video dan buat contoh script secara otomatis.
+        CreatorKit ID membantu YouTuber, TikToker,
+        Facebook creator, Instagram creator, dan UMKM
+        membuat konten dengan bantuan AI.
     </p>
 
-    <label for="topic">Topik Video</label>
+    <a href="#generator" class="button">
+        Mulai Sekarang →
+    </a>
 
-    <input
-        id="topic"
-        type="text"
-        placeholder="Contoh: 5 fakta tentang Indonesia"
-    >
+</section>
 
 
-    <label for="platform">Platform</label>
+<section class="section" id="tools">
 
-    <select id="platform">
-        <option>YouTube Shorts</option>
-        <option>TikTok</option>
-        <option>Facebook Reels</option>
-        <option>Instagram Reels</option>
-    </select>
+    <div class="section-title">
 
+        <h2>🛠️ Creator Tools</h2>
 
-    <label for="style">Gaya Konten</label>
-
-    <select id="style">
-        <option>Misterius</option>
-        <option>Informasi</option>
-        <option>Lucu</option>
-        <option>Inspiratif</option>
-        <option>Emosional</option>
-    </select>
-
-
-    <button class="button" onclick="generateScript()">
-        ⚡ Generate Script
-    </button>
-
-
-    <div class="result" id="result">
-
-        <h3>Hasil Script</h3>
-
-        <p id="scriptResult"></p>
+        <p>
+            Tools AI untuk membantu proses pembuatan konten.
+        </p>
 
     </div>
 
-</div>
 
-</section><section class="section" id="tentang"><div class="section-title">
-    <h2>Mengapa CreatorKit ID?</h2>
-    <p>Dibuat untuk membantu creator Indonesia.</p>
-</div>
+    <div class="tools">
 
-<div class="features">
+        <div class="tool">
+            <div class="icon">📝</div>
+            <h3>Script Generator</h3>
+            <p>
+                Buat script video berdasarkan topik.
+            </p>
+        </div>
 
-    <div class="feature">
-        <div class="icon">🆓</div>
-        <strong>Gratis</strong>
-        Mulai tanpa biaya.
+
+        <div class="tool">
+            <div class="icon">🧲</div>
+            <h3>Hook Generator</h3>
+            <p>
+                Buat pembukaan video yang menarik.
+            </p>
+        </div>
+
+
+        <div class="tool">
+            <div class="icon">💡</div>
+            <h3>Ide Konten</h3>
+            <p>
+                Temukan ide konten baru dengan AI.
+            </p>
+        </div>
+
+
+        <div class="tool">
+            <div class="icon">📱</div>
+            <h3>Caption</h3>
+            <p>
+                Buat caption untuk media sosial.
+            </p>
+        </div>
+
+
+        <div class="tool">
+            <div class="icon">🎨</div>
+            <h3>AI Prompt</h3>
+            <p>
+                Buat prompt gambar dan video AI.
+            </p>
+        </div>
+
     </div>
 
-    <div class="feature">
-        <div class="icon">⚡</div>
-        <strong>Cepat</strong>
-        Buat ide konten dalam hitungan detik.
+
+    <div class="generator" id="generator">
+
+        <h2>🤖 AI Content Generator</h2>
+
+        <p>
+            Masukkan topik, pilih platform dan gaya konten.
+            AI akan membuat paket konten untukmu.
+        </p>
+
+
+        <label for="topic">
+            Topik Video
+        </label>
+
+        <input
+            id="topic"
+            type="text"
+            placeholder="Contoh: 5 fakta unik tentang Pulau Sapeken"
+        >
+
+
+        <label for="platform">
+            Platform
+        </label>
+
+        <select id="platform">
+
+            <option>YouTube Shorts</option>
+
+            <option>TikTok</option>
+
+            <option>Facebook Reels</option>
+
+            <option>Instagram Reels</option>
+
+        </select>
+
+
+        <label for="style">
+            Gaya Konten
+        </label>
+
+        <select id="style">
+
+            <option>Misterius</option>
+
+            <option>Informasi</option>
+
+            <option>Lucu</option>
+
+            <option>Inspiratif</option>
+
+            <option>Emosional</option>
+
+        </select>
+
+
+        <button
+            id="generateButton"
+            class="button generate-button"
+            onclick="generateScript()"
+        >
+            ⚡ Generate Konten AI
+        </button>
+
+
+        <div class="status" id="status"></div>
+
+
+        <div class="result" id="result">
+
+            <div class="result-header">
+
+                <h3>
+                    ✨ Hasil AI
+                </h3>
+
+                <button
+                    class="copy-button"
+                    onclick="copyResult()"
+                >
+                    📋 Copy
+                </button>
+
+            </div>
+
+
+            <div class="result-content">
+
+                <p id="scriptResult"></p>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <div class="feature">
-        <div class="icon">📱</div>
-        <strong>Mobile Friendly</strong>
-        Bisa digunakan dari HP.
+</section>
+
+
+<section class="section" id="tentang">
+
+    <div class="section-title">
+
+        <h2>
+            Mengapa CreatorKit ID?
+        </h2>
+
+        <p>
+            Dibuat untuk membantu creator Indonesia.
+        </p>
+
     </div>
 
-</div>
 
-</section><footer><strong>CreatorKit ID</strong>
+    <div class="features">
 
-<p>
-    Tools sederhana untuk membantu creator Indonesia.
-</p>
+        <div class="feature">
 
-<p>
-    © 2026 CreatorKit ID
-</p>
+            <div class="icon">
+                🆓
+            </div>
 
-</footer><script>
+            <strong>
+                Gratis
+            </strong>
+
+            Mulai tanpa biaya.
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">
+                ⚡
+            </div>
+
+            <strong>
+                Cepat
+            </strong>
+
+            Buat konten dalam hitungan detik.
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="icon">
+                📱
+            </div>
+
+            <strong>
+                Mobile Friendly
+            </strong>
+
+            Bisa digunakan dari HP.
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <strong>
+        CreatorKit ID
+    </strong>
+
+    <p>
+        Tools AI sederhana untuk membantu creator Indonesia.
+    </p>
+
+    <p>
+        © 2026 CreatorKit ID
+    </p>
+
+</footer>
+
+
+<script>
+
+const WORKER_URL =
+    "https://creatorkit-ai.halimpangarimanan.workers.dev";
+
 
 async function generateScript() {
 
-    const topic = document.getElementById("topic").value.trim();
-    const platform = document.getElementById("platform").value;
-    const style = document.getElementById("style").value;
+    const topic =
+        document.getElementById("topic").value.trim();
 
-    const result = document.getElementById("result");
-    const scriptResult = document.getElementById("scriptResult");
+    const platform =
+        document.getElementById("platform").value;
+
+    const style =
+        document.getElementById("style").value;
+
+    const result =
+        document.getElementById("result");
+
+    const scriptResult =
+        document.getElementById("scriptResult");
+
+    const button =
+        document.getElementById("generateButton");
+
+    const status =
+        document.getElementById("status");
+
+
+    // Validasi topik
 
     if (!topic) {
-        alert("Silakan masukkan topik video terlebih dahulu.");
+
+        alert(
+            "Silakan masukkan topik video terlebih dahulu."
+        );
+
         return;
     }
 
-    scriptResult.textContent = "⏳ Sedang membuat script...";
-    result.style.display = "block";
+
+    // Loading
+
+    button.disabled = true;
+
+    button.textContent =
+        "⏳ AI sedang bekerja...";
+
+    status.textContent =
+        "Menghubungkan ke CreatorKit AI...";
+
+    status.className =
+        "status";
+
+    result.style.display =
+        "block";
+
+    scriptResult.textContent =
+        "AI sedang membuat konten untuk kamu...";
+
 
     try {
 
-        const response = await fetch(
-            "creatorkit-ai.halimpangarimanan.workers.dev"
-            {
-                method: "POST",
+        const response =
+            await fetch(
+                WORKER_URL,
+                {
+                    method: "POST",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
 
-                body: JSON.stringify({
-                    topic: topic,
-                    platform: platform,
-                    style: style
-                })
-            }
-        );
+                    body: JSON.stringify({
 
-        const data = await response.json();
+                        topic: topic,
+
+                        platform: platform,
+
+                        style: style
+
+                    })
+                }
+            );
+
+
+        const data =
+            await response.json();
+
 
         if (!response.ok) {
-            throw new Error(data.error || "Terjadi kesalahan.");
+
+            throw new Error(
+                data.error ||
+                "Terjadi kesalahan pada server."
+            );
+
         }
 
-        scriptResult.textContent = data.script;
+
+        if (!data.result) {
+
+            throw new Error(
+                "AI tidak memberikan hasil."
+            );
+
+        }
+
+
+        // Tampilkan hasil Gemini
+
+        scriptResult.textContent =
+            data.result;
+
+
+        status.textContent =
+            "✅ Konten berhasil dibuat oleh AI.";
+
+        status.className =
+            "status";
+
 
     } catch (error) {
 
+        console.error(
+            "CreatorKit Error:",
+            error
+        );
+
+
         scriptResult.textContent =
-            "❌ Gagal menghubungi server.\n\n" +
+            "❌ Gagal membuat konten.\n\n" +
             error.message;
 
+
+        status.textContent =
+            "Periksa koneksi Worker dan Gemini API.";
+
+        status.className =
+            "status error";
+
     }
+
+
+    // Kembalikan tombol
+
+    button.disabled =
+        false;
+
+    button.textContent =
+        "⚡ Generate Konten AI";
+
+
+    // Scroll ke hasil
 
     result.scrollIntoView({
         behavior: "smooth",
         block: "start"
     });
+
+}
+
+
+async function copyResult() {
+
+    const text =
+        document.getElementById(
+            "scriptResult"
+        ).textContent;
+
+
+    if (!text) {
+        return;
     }
 
-</script></body>
+
+    try {
+
+        await navigator.clipboard.writeText(
+            text
+        );
+
+
+        alert(
+            "✅ Hasil berhasil disalin!"
+        );
+
+
+    } catch (error) {
+
+        alert(
+            "Gagal menyalin. Silakan copy secara manual."
+        );
+
+    }
+
+}
+
+
+// Enter untuk generate
+
+document
+    .getElementById("topic")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                generateScript();
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
 </html>
