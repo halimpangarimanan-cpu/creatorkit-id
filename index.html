@@ -1,0 +1,509 @@
+<!DOCTYPE html><html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CreatorKit ID — Tools AI untuk Creator</title>
+
+<meta name="description" content="CreatorKit ID adalah kumpulan tools untuk membantu creator Indonesia membuat konten lebih cepat.">
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f5f7fb;
+        color: #111827;
+        line-height: 1.6;
+    }
+
+    header {
+        background: #ffffff;
+        border-bottom: 1px solid #e5e7eb;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .nav {
+        max-width: 1100px;
+        margin: auto;
+        padding: 16px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 22px;
+        font-weight: 800;
+        color: #2563eb;
+    }
+
+    .logo span {
+        color: #111827;
+    }
+
+    .nav a {
+        text-decoration: none;
+        color: #374151;
+        margin-left: 20px;
+        font-size: 14px;
+    }
+
+    .hero {
+        max-width: 1100px;
+        margin: auto;
+        padding: 80px 20px 60px;
+        text-align: center;
+    }
+
+    .badge {
+        display: inline-block;
+        background: #dbeafe;
+        color: #1d4ed8;
+        padding: 7px 14px;
+        border-radius: 50px;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .hero h1 {
+        font-size: clamp(38px, 7vw, 68px);
+        line-height: 1.05;
+        margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+        color: #2563eb;
+    }
+
+    .hero p {
+        max-width: 650px;
+        margin: auto;
+        color: #6b7280;
+        font-size: 18px;
+    }
+
+    .button {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 14px 25px;
+        border-radius: 10px;
+        background: #2563eb;
+        color: white;
+        text-decoration: none;
+        font-weight: 700;
+        border: none;
+        cursor: pointer;
+    }
+
+    .button:hover {
+        background: #1d4ed8;
+    }
+
+    .section {
+        max-width: 1100px;
+        margin: auto;
+        padding: 40px 20px 80px;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 35px;
+    }
+
+    .section-title h2 {
+        font-size: 32px;
+        margin-bottom: 8px;
+    }
+
+    .section-title p {
+        color: #6b7280;
+    }
+
+    .tools {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 18px;
+    }
+
+    .tool {
+        background: white;
+        padding: 25px 18px;
+        border-radius: 16px;
+        border: 1px solid #e5e7eb;
+        transition: 0.2s;
+    }
+
+    .tool:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+    }
+
+    .icon {
+        font-size: 32px;
+        margin-bottom: 12px;
+    }
+
+    .tool h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .tool p {
+        color: #6b7280;
+        font-size: 14px;
+    }
+
+    .generator {
+        max-width: 750px;
+        margin: 50px auto 0;
+        background: white;
+        padding: 30px;
+        border-radius: 18px;
+        border: 1px solid #e5e7eb;
+    }
+
+    .generator h2 {
+        margin-bottom: 8px;
+    }
+
+    .generator > p {
+        color: #6b7280;
+        margin-bottom: 25px;
+    }
+
+    label {
+        display: block;
+        font-weight: 700;
+        margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 13px;
+        border: 1px solid #d1d5db;
+        border-radius: 9px;
+        margin-bottom: 18px;
+        font-size: 15px;
+        font-family: inherit;
+    }
+
+    textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .result {
+        display: none;
+        margin-top: 25px;
+        padding: 20px;
+        background: #f8fafc;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+    }
+
+    .result h3 {
+        margin-bottom: 10px;
+    }
+
+    .result p {
+        white-space: pre-line;
+    }
+
+    .features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .feature {
+        text-align: center;
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+    }
+
+    .feature strong {
+        display: block;
+        margin-bottom: 7px;
+    }
+
+    footer {
+        background: #111827;
+        color: white;
+        text-align: center;
+        padding: 35px 20px;
+    }
+
+    footer p {
+        color: #9ca3af;
+        font-size: 14px;
+        margin-top: 8px;
+    }
+
+    @media (max-width: 850px) {
+        .tools {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .nav a {
+            display: none;
+        }
+
+        .hero {
+            padding-top: 55px;
+        }
+
+        .hero p {
+            font-size: 16px;
+        }
+
+        .tools,
+        .features {
+            grid-template-columns: 1fr;
+        }
+
+        .generator {
+            padding: 22px;
+        }
+    }
+</style>
+
+</head><body><header>
+    <div class="nav">
+        <div class="logo">Creator<span>Kit ID</span></div>    <nav>
+        <a href="#tools">Tools</a>
+        <a href="#generator">Generator</a>
+        <a href="#tentang">Tentang</a>
+    </nav>
+</div>
+
+</header><section class="hero"><div class="badge">🚀 GRATIS UNTUK CREATOR INDONESIA</div>
+
+<h1>
+    Buat Konten<br>
+    <span>Lebih Cepat.</span>
+</h1>
+
+<p>
+    CreatorKit ID membantu YouTuber, TikToker,
+    Facebook creator, dan UMKM membuat ide dan
+    konten dengan lebih mudah.
+</p>
+
+<a href="#generator" class="button">
+    Mulai Sekarang →
+</a>
+
+</section><section class="section" id="tools"><div class="section-title">
+    <h2>🛠️ Creator Tools</h2>
+    <p>Pilih tools yang kamu butuhkan.</p>
+</div>
+
+<div class="tools">
+
+    <div class="tool">
+        <div class="icon">📝</div>
+        <h3>Script Generator</h3>
+        <p>Buat script video berdasarkan topik.</p>
+    </div>
+
+    <div class="tool">
+        <div class="icon">🧲</div>
+        <h3>Hook Generator</h3>
+        <p>Buat pembukaan video yang menarik.</p>
+    </div>
+
+    <div class="tool">
+        <div class="icon">💡</div>
+        <h3>Ide Konten</h3>
+        <p>Temukan ide konten baru.</p>
+    </div>
+
+    <div class="tool">
+        <div class="icon">📱</div>
+        <h3>Caption</h3>
+        <p>Buat caption untuk media sosial.</p>
+    </div>
+
+    <div class="tool">
+        <div class="icon">🎨</div>
+        <h3>AI Prompt</h3>
+        <p>Buat prompt gambar dan video AI.</p>
+    </div>
+
+</div>
+
+
+<div class="generator" id="generator">
+
+    <h2>📝 Script Generator</h2>
+
+    <p>
+        Masukkan topik video dan buat contoh script secara otomatis.
+    </p>
+
+    <label for="topic">Topik Video</label>
+
+    <input
+        id="topic"
+        type="text"
+        placeholder="Contoh: 5 fakta tentang Indonesia"
+    >
+
+
+    <label for="platform">Platform</label>
+
+    <select id="platform">
+        <option>YouTube Shorts</option>
+        <option>TikTok</option>
+        <option>Facebook Reels</option>
+        <option>Instagram Reels</option>
+    </select>
+
+
+    <label for="style">Gaya Konten</label>
+
+    <select id="style">
+        <option>Misterius</option>
+        <option>Informasi</option>
+        <option>Lucu</option>
+        <option>Inspiratif</option>
+        <option>Emosional</option>
+    </select>
+
+
+    <button class="button" onclick="generateScript()">
+        ⚡ Generate Script
+    </button>
+
+
+    <div class="result" id="result">
+
+        <h3>Hasil Script</h3>
+
+        <p id="scriptResult"></p>
+
+    </div>
+
+</div>
+
+</section><section class="section" id="tentang"><div class="section-title">
+    <h2>Mengapa CreatorKit ID?</h2>
+    <p>Dibuat untuk membantu creator Indonesia.</p>
+</div>
+
+<div class="features">
+
+    <div class="feature">
+        <div class="icon">🆓</div>
+        <strong>Gratis</strong>
+        Mulai tanpa biaya.
+    </div>
+
+    <div class="feature">
+        <div class="icon">⚡</div>
+        <strong>Cepat</strong>
+        Buat ide konten dalam hitungan detik.
+    </div>
+
+    <div class="feature">
+        <div class="icon">📱</div>
+        <strong>Mobile Friendly</strong>
+        Bisa digunakan dari HP.
+    </div>
+
+</div>
+
+</section><footer><strong>CreatorKit ID</strong>
+
+<p>
+    Tools sederhana untuk membantu creator Indonesia.
+</p>
+
+<p>
+    © 2026 CreatorKit ID
+</p>
+
+</footer><script>
+
+function generateScript() {
+
+    const topic = document.getElementById("topic").value.trim();
+
+    const platform = document.getElementById("platform").value;
+
+    const style = document.getElementById("style").value;
+
+    const result = document.getElementById("result");
+
+    const scriptResult = document.getElementById("scriptResult");
+
+
+    if (!topic) {
+
+        alert("Silakan masukkan topik video terlebih dahulu.");
+
+        return;
+
+    }
+
+
+    const script =
+
+`HOOK
+
+"Stop scroll! Kamu mungkin belum tahu fakta menarik tentang ${topic}."
+
+
+KONFLIK
+
+"Banyak orang membahas ${topic}, tetapi ternyata ada sisi lain yang jarang diketahui."
+
+
+ISI
+
+"Pertama, kita perlu memahami apa sebenarnya ${topic}.
+
+Kemudian, ada beberapa fakta menarik yang membuat topik ini semakin menarik untuk dibahas.
+
+Inilah alasan mengapa ${topic} layak untuk kamu ketahui."
+
+
+TWIST
+
+"Dan yang paling mengejutkan adalah, ternyata masih banyak orang yang belum mengetahui fakta tersebut."
+
+
+CTA
+
+"Kalau kamu suka konten seperti ini, follow dan bagikan video ini."
+
+
+Platform: ${platform}
+Gaya: ${style}`;
+
+
+    scriptResult.textContent = script;
+
+    result.style.display = "block";
+
+    result.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+}
+
+</script></body>
+</html>
